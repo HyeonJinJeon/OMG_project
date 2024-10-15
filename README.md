@@ -1,5 +1,10 @@
-# OMG (Oh My Guide)
-- omg 접속 주소 : http://43.202.189.185:8080/
+# OMG: 여행 계획 및 동행자 모집 플랫폼
+
+- omg 접속 : [OMG Link](http://43.202.189.185:8080/)
+<br/>
+
+
+OMG(Oh My Guide)는 사용자가 여행 계획을 세우고 동행자를 모집하며, 여행 후기를 공유할 수 있는 종합 여행 지원 플랫폼입니다. 실시간 소통 기능을 통해 보다 원활하고 즐거운 여행 경험을 제공하도록 설계되었습니다.
 
 ## 팀 소개 (Team)
 
@@ -9,42 +14,42 @@
 |:---------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------:|
 | <img width="150" height="150" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Axa1JxoAfrkVVHgQmEI49vuREEtRJoQ9Xw&s"> | <img width="150" height="150" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Axa1JxoAfrkVVHgQmEI49vuREEtRJoQ9Xw&s"> | <img width="150" height="150" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Axa1JxoAfrkVVHgQmEI49vuREEtRJoQ9Xw&s"> | <img width="150" height="150" src="https://github.com/user-attachments/assets/8d5bb1bb-d84f-4b09-af8a-315f82271388"> | <img width="150" height="150" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Axa1JxoAfrkVVHgQmEI49vuREEtRJoQ9Xw&s"> | 
 |                                                                팀장                                                                 |                                                                팀원                                                                 |                                                                팀원                                                                 |                                                     카페인 대신 초콜릿🍫                                                     |                                                                팀원                                                                 | 
+## 📅 개발 기간
+2024.07.23 ~ 2024.09.06 (7주)
 
+## 🧐 문제점
+- **여행 계획의 복잡함**: 여행 일정을 세우는 데 많은 시간과 노력이 필요합니다.
+- **적합한 동행자 찾기 어려움**: 함께 여행할 동행자를 구하는 것이 쉽지 않습니다.
+- **여행 후기 정보의 부족**: 유용한 여행 정보를 얻고 나누는 데 제약이 있습니다.
 
+## 💡 아이디어
+여행 일정을 추천하고, 동행자를 쉽게 모집하며, 여행 경험을 공유할 수 있는 종합 플랫폼을 제공하여 여행 준비의 복잡함과 동행자 찾기의 어려움을 해결합니다.
 
-**목차**
+## 💯 솔루션
+여행 일정 추천, 동행자 모집, 여행 후기 공유 등 다양한 기능을 제공해 여행의 모든 과정을 지원합니다.
 
-1. [프로젝트 개요 (Overview)](#프로젝트-개요-overview)
-2. [기술 스택 (Tech Stack)](#기술-스택-tech-stack)
-3. [설치 및 실행 방법 (Installation & Setup)](#설치-및-실행-방법-installation--setup)
-4. [주요 기능 (Features)](#주요-기능-features)
-5. [프로젝트 구조 (Project Structure)](#프로젝트-구조-project-structure)
-6. [데모 (Demo)](#데모-demo)
-7. [테스트 (Testing)](#테스트-testing)
-8. [기여 방법 (Contributing)](#기여-방법-contributing)
-9. [라이선스 (License)](#라이선스-license)
-10. [문제 해결 (Troubleshooting) 및 FAQ](#문제-해결-troubleshooting-및-faq)
-11. [향후 계획 (Future Work)](#향후-계획-future-work)
-12. [기타 참고 자료 (Additional Resources)](#기타-참고-자료-additional-resources)
----
+## 📹 주요 기능과 로직
+1. **지역 명소 추천**: 여행 일정 생성시 지역을 선택하면 명소를 추천합니다.
+2. **동행자 모집**: 사용자가 원하는 여행에 함께할 동행자를 모집할 수 있습니다.
+3. **여행 후기 공유**: 여행 경험을 공유하고 다른 사용자의 후기에서 유용한 정보를 얻을 수 있습니다.
+4. **여행 일정 관리**: 자신만의 여행 일정을 등록하고 관리할 수 있습니다. 사용자는 캘린터를 통해 자신의 일정을 한눈에 확인할 수 있습니다.
+5. **실시간 채팅 기능**: 팀원 간 실시간 채팅이 가능하여 원활한 소통을 지원합니다.
+6. **알림 기능**: 게시글의 댓글, 내 댓글의 대댓글, 채팅에 대한 알림 기능이 있습니다.
 
-## 프로젝트 개요 (Overview)
+## 🏗 서비스 구조
+### Frontend
+- **기술**: JavaScript, CSS, Thymeleaf
+- **UI/UX 디자인**: 사용자 친화적인 인터페이스 설계
 
-OMG(Oh My Guide)는 사용자가 **여행을 계획**하고 **동행자를 모집**하며, **여행 후기를 공유**할 수 있는 종합 여행 지원 플랫폼입니다. 이 프로젝트는 사용자에게 맞춤형 여행 일정을 제공하고, 실시간 소통 기능을 통해 보다 원활하고 즐거운 여행 경험을 제공하도록 설계되었습니다.
+### Backend
+- **기술**: Java (version 21), Spring Boot, Spring Data JPA
+- **관리 및 배포**: Gradle, Docker, MySQL, AWS (EC2, RDS)
+  
+### DevOps
+- **호스팅**: AWS EC2
+- **데이터베이스 관리**: AWS RDS
 
-- **문제 정의**:
-
-  여행을 계획하는 과정은 복잡하고 시간 소모적입니다. 또한, 동행자를 찾고 함께 소통하는 것 또한 쉽지 않습니다. 여행 후기를 나누는 과정에서도 정보의 교류가 제한적일 수 있습니다.
-
-- **해결 방안**:
-
-  OMG는 사용자의 개인화된 여행 일정을 제안하고, 동행자를 모집할 수 있는 기능을 제공합니다. 또한, 실시간 채팅 및 커뮤니티 기능을 통해 사용자들이 여행 후기를 쉽게 공유하고 소통할 수 있도록 지원합니다.
-
-
----
-
-## 기술 스택 (Tech Stack)
-
+## 🛠 기술 스택
 **프론트엔드**
 
 - **Thymeleaf**: 서버 사이드 템플릿 엔진으로, 동적인 HTML 콘텐츠를 생성하여 사용자에게 제공.
@@ -52,17 +57,21 @@ OMG(Oh My Guide)는 사용자가 **여행을 계획**하고 **동행자를 모�
 **백엔드**
 
 - **Java**: 애플리케이션 로직 구현을 위한 주요 언어.
-- **Kafka**: 실시간 채팅 기능 구현을 위한 메시징 시스템.
-- **Redis**: 알림 기능 및 세션 관리 용도로 사용되는 인메모리 데이터베이스.
+- Spring: Java 기반의 프레임워크.
+- Spring Boot: Spring 프레임워크를 기반으로 한 확장형 프로젝트로, 초기 설정을 간편화하고 빠른 개발을 지원.
 
 **데이터베이스**
 
 - **MySQL**: 데이터 저장 및 관리 용도로 사용하는 관계형 데이터베이스 관리 시스템.
+- **Redis**: 알림 기능 및 세션 관리 용도로 사용되는 인메모리 데이터베이스.
+
+**메시징**
+
+- **Kafka**: 실시간 채팅 기능 구현을 위한 메시징 시스템.
 
 **배포 및 인프라**
 
 - **Docker**: 애플리케이션 및 서비스의 컨테이너화.
-- **GithubAction**: CI/CD 파이프라인을 통한 자동화된 빌드 및 배포.
 - **Jenkins**: CI/CD 파이프라인을 통한 자동화된 빌드 및 배포.
 
 **기타**
@@ -73,9 +82,30 @@ OMG(Oh My Guide)는 사용자가 **여행을 계획**하고 **동행자를 모�
 - **Weather API**: 날씨 정보 제공.
 - **Channel API**: 소통 및 알림 기능 제공.
 
----
+## :construction: 프로젝트 구조 (Project Structure)
 
-## 설치 및 실행 방법 (Installation & Setup)
+    /src                            # 소스 코드 루트 디렉토리
+    └── /domain                     # 도메인 모델 정의 관련 코드
+        ├── /config                 # 도메인 관련 설정 파일들
+        ├── /controller             # 컨트롤러 레이어 (API 엔드포인트)
+        ├── /service                # 서비스 레이어 (비즈니스 로직)
+        │   └── /impl               # 서비스 구현체
+        ├── /repository             # 데이터베이스 접근 레이어 (DAO)
+        ├── /dto                    # 데이터 전송 객체 (Data Transfer Objects)
+        └── /entity                 # 엔티티 클래스 (DB 매핑 객체)
+    
+    └── /global                     # 글로벌 설정 및 공통 유틸리티
+        ├── /config                 # 전역 설정 파일들
+        ├── /exception              # 전역 예외 처리 클래스
+        ├── /image                  # 이미지 처리 유틸리티
+        ├── /jwt                    # JWT 관련 유틸리티 및 구성
+        ├── /oauth2                 # OAuth2 관련 유틸리티 및 구성
+        └── /security               # 보안 관련 설정 및 유틸리티
+
+
+## :mag: 설치 및 실행 방법 (Installation & Setup)
+<details>
+<summary><strong>설치 및 실행 방법</strong></summary>
 
 ### 필수 설치 도구
 
@@ -181,40 +211,11 @@ OMG(Oh My Guide)는 사용자가 **여행을 계획**하고 **동행자를 모�
     INSERT INTO roles (id, name) VALUES (2, 'ROLE_USER');
     ```
 ---
+</details>
 
-## 주요 기능 (Features)
-
-- **맞춤형 여행 일정 제공**: 사용자의 여행 선호에 맞춘 일정을 추천.
-- **여행 크루 모집**: 동행자를 모집하고 커뮤니티 기능을 통해 소통.
-- **일정 공유**: 친구나 가족과 여행 일정을 공유.
-- **여행 플래너**: 여행 일정을 계획하고 관리할 수 있는 기능 제공.
-- **여행 리뷰**: 여행 후기를 게시판에 공유하고 다른 사용자들과 소통.
-
----
-
-## 프로젝트 구조 (Project Structure)
-
-    /src                            # 소스 코드 루트 디렉토리
-    └── /domain                     # 도메인 모델 정의 관련 코드
-        ├── /config                 # 도메인 관련 설정 파일들
-        ├── /controller             # 컨트롤러 레이어 (API 엔드포인트)
-        ├── /service                # 서비스 레이어 (비즈니스 로직)
-        │   └── /impl               # 서비스 구현체
-        ├── /repository             # 데이터베이스 접근 레이어 (DAO)
-        ├── /dto                    # 데이터 전송 객체 (Data Transfer Objects)
-        └── /entity                 # 엔티티 클래스 (DB 매핑 객체)
-    
-    └── /global                     # 글로벌 설정 및 공통 유틸리티
-        ├── /config                 # 전역 설정 파일들
-        ├── /exception              # 전역 예외 처리 클래스
-        ├── /image                  # 이미지 처리 유틸리티
-        ├── /jwt                    # JWT 관련 유틸리티 및 구성
-        ├── /oauth2                 # OAuth2 관련 유틸리티 및 구성
-        └── /security               # 보안 관련 설정 및 유틸리티
-
----
-
-## 데모 (Demo)
+## :pager: 데모 (Demo)
+<details>
+<summary><strong>화면 구성</strong></summary>
 
 <div align="center">
 
@@ -283,42 +284,11 @@ OMG(Oh My Guide)는 사용자가 **여행을 계획**하고 **동행자를 모�
 
 </div>
 
----
+</details>
 
-## 기여 방법 (Contributing)
+## :pencil: 기여 방법 (Contributing)
 
 - **브랜치 생성**: 📑[Branch Convention](https://github.com/oh-my-guide/OMG_project/wiki/Branch-Convention)
 - **이슈 제출**: 📑[Issue Convention](https://github.com/oh-my-guide/OMG_project/wiki/Issue-Convention)
 - **Pull Request (PR) 작성**: 📑[PR Convention](https://github.com/oh-my-guide/OMG_project/wiki/PR-Convention)
 - **코드 스타일 가이드**: 📑[Coding Convention](https://github.com/oh-my-guide/OMG_project/wiki/Coding-Convention)
-
----
-
-## 문제 해결 (Troubleshooting) 및 FAQ
-
-- **자주 발생하는 문제**:
-    - Docker 컨테이너가 시작되지 않는 경우: Docker 로그를 확인하고 필요한 설정을 검토하세요.
-    - MySQL 연결 문제: 데이터베이스 설정과 사용자 인증 정보를 확인하세요.
-- **FAQ**:
-    - **Q**: 프로젝트를 실행하는데 필요한 필수 소프트웨어는 무엇인가요?**A**: Java 21, Docker, MySQL, Redis, Kafka가 필요합니다.
-    - **Q**: 오류가 발생했을 때 어떻게 해결하나요?**A**: 오류 로그를 확인하고 문제를 추적하세요. 필요시 GitHub Issues를 통해 도움을 요청할 수 있습니다.
-
----
-
-## 향후 계획 (Future Work)
-
-- **추가 기능 개발**: 새로운 여행지 추천 기능 및 사용자 리뷰 분석 알고리즘 개선.
-- **성능 최적화**: 실시간 채팅 기능의 성능 향상 및 확장성 개선.
-- **UI/UX 개선**: 사용자 경험을 향상시키기 위한 인터페이스 개편.
-
----
-
-## 기타 참고 자료 (Additional Resources)
-
-- [Java Documentation](https://docs.oracle.com/en/java/)
-- Docker Documentation
-- Thymeleaf Documentation
-- [Kafka Documentation](https://kafka.apache.org/documentation/)
-- Redis Documentation
-
----
