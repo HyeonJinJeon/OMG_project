@@ -10,10 +10,10 @@ OMG(Oh My Guide)는 사용자가 여행 계획을 세우고 동행자를 모집�
 
 ## 👨‍👨‍👦‍👦 팀원
 
-|                                               [전현진](https://github.com/HyeonJinJeon)                                                |                                                    [곽유진](https://github.com/jinijavac)                                                     |                                                    [손설빈](https://github.com/seolbb)                                                     |                                          [김혜주](https://github.com/kimoju01)                                          |                                                    [박경서](https://github.com/kyongseo)                                                     |
-|:---------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------:|
-| <img width="150" height="150" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Axa1JxoAfrkVVHgQmEI49vuREEtRJoQ9Xw&s"> | <img width="150" height="150" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Axa1JxoAfrkVVHgQmEI49vuREEtRJoQ9Xw&s"> | <img width="150" height="150" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Axa1JxoAfrkVVHgQmEI49vuREEtRJoQ9Xw&s"> | <img width="150" height="150" src="https://github.com/user-attachments/assets/8d5bb1bb-d84f-4b09-af8a-315f82271388"> | <img width="150" height="150" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Axa1JxoAfrkVVHgQmEI49vuREEtRJoQ9Xw&s"> | 
-|                                                                팀장                                                                 |                                                                팀원                                                                 |                                                                팀원                                                                 |                                                     카페인 대신 초콜릿🍫                                                     |                                                                팀원                                                                 | 
+| [전현진](https://github.com/HyeonJinJeon) | [곽유진](https://github.com/jinijavac) | [손설빈](https://github.com/seolbb) | [김혜주](https://github.com/kimoju01) | [박경서](https://github.com/kyongseo) |
+|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
+| 팀장 | 팀원 | 팀원 | 팀원 | 팀원 |
+
 ## 📅 개발 기간
 2024.07.23 ~ 2024.09.06 (7주)
 
@@ -81,6 +81,10 @@ OMG(Oh My Guide)는 사용자가 여행 계획을 세우고 동행자를 모집�
 - **Tour API**: 여행지 관련 정보 제공.
 - **Weather API**: 날씨 정보 제공.
 - **Channel API**: 소통 및 알림 기능 제공.
+
+## 아키텍처
+<img src="https://github.com/user-attachments/assets/d8941a78-9bf3-4a7b-b5a4-49a0e1eb9133" alt="아키텍처 설명" width="500"/>
+
 
 ## :construction: 프로젝트 구조 (Project Structure)
 
