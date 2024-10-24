@@ -12,8 +12,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'hjin-cicd',
-                    url: 'https://github.com/oh-my-guide/OMG_project.git',
+                git branch: 'main',
+                    url: 'https://github.com/HyeonJinJeon/OMG_project.git',
                     credentialsId: 'hjinnny_github_id'
             }
         }
