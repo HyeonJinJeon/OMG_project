@@ -3,11 +3,11 @@ package com.example.omg_project.domain.chat.service.impl;
 import com.example.omg_project.domain.chat.service.BadWordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -23,16 +23,13 @@ public class BadWordServiceImpl implements BadWordService {
      */
     @Override
     public String filterMessage(String message) {
-        ListOperations<String, String> listOps = redisTemplate.opsForList();
-        List<String> badWords = listOps.range("bad_words", 0, -1);  // Redis에서 비속어 목록 조회
+        SetOperations<String, String> setOps = redisTemplate.opsForSet();
+        Set<String> badWords = setOps.members("bad_words");  // Redis에서 비속어 Set 조회
 
         if (badWords != null) {
             for (String badWord : badWords) {
                 if (message.contains(badWord)) {
-                    String filterWord = "";
-                    for(int i = 0; i < badWord.length(); i++) {
-                        filterWord += "*";
-                    }
+                    String filterWord = "*".repeat(badWord.length());
                     message = message.replaceAll(badWord, filterWord);
                 }
             }
