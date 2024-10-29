@@ -53,8 +53,9 @@ public class ChatMessageListener {
      * @param topic   메시지가 수신된 토픽 이름
      * @throws Exception 메시지 처리 중 발생한 예외
      */
-    @KafkaListener(topics = "chatTopic", groupId = "chat-room-listener")
-    public void listen(@Payload String message, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) throws Exception {
+    @KafkaListener(topicPattern = "chatTopic.*", groupId = "chat-room-listener")
+    public void listen(@Payload String message, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic, @Header(KafkaHeaders.RECEIVED_PARTITION) int partition) throws Exception {
+        logger.info("수신된 토픽: " + topic + ", 수신된 파티션: " + partition + ", 메시지: " + message);
         try {
             // 메시지에서 roomId를 추출
             String roomId = extractRoomIdFromMessage(message);
@@ -87,6 +88,7 @@ public class ChatMessageListener {
             throw new CustomException(ErrorCode.INVALID_MESSAGE_FORMAT); // 기본적인 예외 처리로 변경
         }
     }
+
 
     /**
      * 메시지에서 roomId를 추출
