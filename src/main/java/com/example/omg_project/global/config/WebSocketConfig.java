@@ -42,6 +42,7 @@ public class WebSocketConfig implements WebSocketConfigurer, WebSocketMessageBro
         // STOMP 엔드포인트 설정
         registry.addEndpoint("/ws")
                 .setAllowedOrigins("http://ec2-43-202-189-185.ap-northeast-2.compute.amazonaws.com:8080") // CORS 설정
+                .addInterceptors(customHandshakeInterceptor)
                 .withSockJS();
     }
 }

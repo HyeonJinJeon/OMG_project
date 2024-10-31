@@ -1,5 +1,7 @@
 package com.example.omg_project.domain.chat.controller;
 
+import com.example.omg_project.domain.chat.entity.ChatMessage;
+import com.example.omg_project.domain.chat.kafka.ChatMessageProducer;
 import com.example.omg_project.domain.chat.service.ChatService;
 import com.example.omg_project.domain.trip.service.TeamService;
 import com.example.omg_project.domain.trip.service.TripService;
@@ -9,11 +11,18 @@ import com.example.omg_project.global.jwt.util.JwtTokenizer;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,6 +31,29 @@ public class ChatController {
     private final ChatService chatService;
     private final JwtTokenizer jwtTokenizer;
     private final UserService userService;
+    private final ChatMessageProducer chatMessageProducer;
+
+
+    @MessageMapping("/chat/{roomId}")
+    public void sendMessageToRoom(String message, @DestinationVariable String roomId, SimpMessageHeaderAccessor headerAccessor) {
+        String nickname = "Unknown user";
+        String username = "Unknown user";
+        String token = (String) headerAccessor.getSessionAttributes().get("jwtToken");
+        System.out.println("토큰" + token);
+        System.out.println("메세지" + message);
+
+        // JWT 토큰에서 사용자 정보를 추출
+        if (token != null && !jwtTokenizer.isAccessTokenExpired(token)) {
+            username = jwtTokenizer.getUsernameFromToken(token);
+            Optional<User> userOptional = userService.findByUsername(username);
+            User user = userOptional.orElseThrow();
+            nickname = user.getUsernick();
+        }
+        System.out.println("-------------------------------------------------------------------------------"+message);
+
+        // Kafka로 메시지 전송
+        chatMessageProducer.sendMessage(roomId, nickname + ": " + message);
+    }
 
     /** TODO
      * 채팅방 화면을 렌더링하는 엔드포인트

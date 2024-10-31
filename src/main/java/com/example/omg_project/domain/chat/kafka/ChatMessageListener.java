@@ -21,6 +21,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -43,6 +44,7 @@ public class ChatMessageListener {
     private final BadWordService badWordService;
     private final NotificationService notificationService;
     private final TeamRepository teamRepository;
+    private final SimpMessagingTemplate messagingTemplate; // STOMP 메시징을 위한 SimpMessagingTemplate 추가
 
     private static final Logger logger = Logger.getLogger(ChatMessageListener.class.getName());
 
@@ -144,27 +146,13 @@ public class ChatMessageListener {
      *
      * @param roomId      메시지가 전송될 채팅방 ID
      * @param chatMessage 전송할 메시지 객체
-     * @throws IOException 메시지 전송 중 발생한 입출력 예외
      */
-    private void broadcastMessage(String roomId, ChatMessage chatMessage) throws IOException {
-        // 해당 채팅방에 연결된 WebSocket 세션들을 가져옴
-        Set<WebSocketSession> sessions = WebSocketHandler.getSessions(roomId);
+    private void broadcastMessage(String roomId, ChatMessage chatMessage){
+        // ChatMessage 객체를 ChatMessageDTO로 변환
+        ChatMessageDTO chatMessageDto = convertToDto(chatMessage);
 
-        if (sessions != null) {
-            // ChatMessage 객체를 ChatMessageDTO로 변환
-            ChatMessageDTO chatMessageDto = convertToDto(chatMessage);
-
-            // ChatMessageDTO를 JSON 문자열로 변환
-            ObjectMapper objectMapper = new ObjectMapper();
-            String jsonMessage = objectMapper.writeValueAsString(chatMessageDto);
-
-            // 각 WebSocket 세션에 메시지 전송
-            for (WebSocketSession session : sessions) {
-                if (session.isOpen()) {
-                    session.sendMessage(new TextMessage(jsonMessage));
-                }
-            }
-        }
+        // STOMP 주제로 메시지 전송
+        messagingTemplate.convertAndSend("/topic/chat/" + roomId, chatMessageDto);
     }
 
     /**

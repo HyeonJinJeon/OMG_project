@@ -7,6 +7,8 @@
   <title>Group Chat</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
   <link rel="stylesheet" href="/css/header.css">
   <style>
     /* Body 스타일 */
@@ -196,35 +198,27 @@
       console.error('Fetch operation error:', textStatus, errorThrown);
     });
 
-    var socket = new WebSocket("ws://ec2-43-202-189-185.ap-northeast-2.compute.amazonaws.com:8080/chat/" + roomId);
+    // SockJS 및 STOMP 연결 설정
+    var socket = new SockJS('/ws');
+    var stompClient = Stomp.over(socket);
 
-    socket.onopen = function() {
-      console.log("WebSocket 서버에 연결되었습니다.");
-    };
+    stompClient.connect({}, function(frame) {
+      console.log("STOMP 서버에 연결되었습니다:", frame);
 
-    socket.onmessage = function(event) {
-      var messageData = JSON.parse(event.data);
-      appendMessage(messageData);
-    };
-
-    socket.onclose = function(event) {
-      if (event.wasClean) {
-        console.log("연결이 정상적으로 종료되었습니다.");
-      } else {
-        console.log("연결에 문제가 발생했습니다.");
-      }
-      console.log("코드: " + event.code + " 이유: " + event.reason);
-    };
-
-    socket.onerror = function(error) {
-      console.log("WebSocket 오류: " + error.message);
-    };
+      // 특정 채팅방에 구독
+      stompClient.subscribe(`/topic/chat/${roomId}`, function(messageOutput) {
+        var messageData = JSON.parse(messageOutput.body);
+        appendMessage(messageData);
+      });
+    }, function(error) {
+      console.log("STOMP 연결 오류:", error);
+    });
 
     $('#sendButton').click(function() {
       var messageInput = $('#messageInput');
       var message = messageInput.val();
       if (message) {
-        socket.send(JSON.stringify({ message: message }));
+        stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify({ message: message }));
         messageInput.val('');
       }
     });
@@ -256,7 +250,7 @@
           success: function(response) {
             var imageUrl = response; // 서버에서 반환한 이미지 URL
             if (imageUrl) {
-              socket.send(JSON.stringify({ imageUrl: imageUrl }));
+              stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify({ imageUrl: imageUrl }));
             } else {
               console.error("서버로부터 이미지 URL을 받을 수 없습니다.");
             }
