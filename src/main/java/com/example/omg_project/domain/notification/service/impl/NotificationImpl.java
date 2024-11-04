@@ -101,4 +101,23 @@ public class NotificationImpl implements NotificationService {
             throw new CustomException(ErrorCode.NOTIFICATION_COUNT_ERROR);
         }
     }
+
+    @Override
+    public void markAllAsReadByType(Long userId, String type) {
+        try {
+            List<Notification> notificationList = notificationRepository.findUnreadNotificationsByUserIdAndType(userId, type);
+
+            // 모든 알림을 읽음 상태로 변경
+            for (Notification notification : notificationList) {
+                notification.setRead(true);
+            }
+
+            // 일괄 저장하여 DB 접근 최소화
+            notificationRepository.saveAll(notificationList);
+
+        } catch (Exception e) {
+            throw new CustomException(ErrorCode.NOTIFICATION_UPDATE_ERROR);
+        }
+    }
+
 }

@@ -82,6 +82,21 @@
         button:hover {
             background-color: #7AB8E3;
         }
+        .notification.slide-out {
+            animation: slideOut 0.5s forwards;
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
@@ -104,6 +119,7 @@
                 <p class="notification-date" th:text="${notification.createdAt}">2024-08-29T12:34:56</p>
                 <button type="button" th:if="!${notification.read}" th:onclick="'markAsRead(' + ${notification.id} + ')'">읽음 처리</button>
             </div>
+            <button type="button" class="mark-all-read" onclick="markAllAsRead('CHAT')">모두 읽음</button>
         </div>
         <div class="notifications" id="JOINPOSTCOMMENT">
             <div th:each="notification : ${notifications}" th:if="${notification.notificationType == 'JOINPOSTCOMMENT' && notification.isRead() == false}" class="notification" th:classappend="${notification.read ? 'read' : 'unread'}">
@@ -111,6 +127,7 @@
                 <p class="notification-date" th:text="${notification.createdAt}">2024-08-29T12:34:56</p>
                 <button type="button" th:if="!${notification.read}" th:onclick="'markAsRead(' + ${notification.id} + ')'">읽음 처리</button>
             </div>
+            <button type="button" class="mark-all-read" onclick="markAllAsRead('JOINPOSTCOMMENT')">모두 읽음</button>
         </div>
         <div class="notifications" id="JOINPOSTREPLY">
             <div th:each="notification : ${notifications}" th:if="${notification.notificationType == 'JOINPOSTREPLY' && notification.isRead() == false}" class="notification" th:classappend="${notification.read ? 'read' : 'unread'}">
@@ -118,6 +135,7 @@
                 <p class="notification-date" th:text="${notification.createdAt}">2024-08-29T12:34:56</p>
                 <button type="button" th:if="!${notification.read}" th:onclick="'markAsRead(' + ${notification.id} + ')'">읽음 처리</button>
             </div>
+            <button type="button" class="mark-all-read" onclick="markAllAsRead('JOINPOSTREPLY')">모두 읽음</button>
         </div>
         <div class="notifications" id="REVIEWPOSTCOMMENT">
             <div th:each="notification : ${notifications}" th:if="${notification.notificationType == 'REVIEWPOSTCOMMENT' && notification.isRead() == false}" class="notification" th:classappend="${notification.read ? 'read' : 'unread'}">
@@ -125,6 +143,7 @@
                 <p class="notification-date" th:text="${notification.createdAt}">2024-08-29T12:34:56</p>
                 <button type="button" th:if="!${notification.read}" th:onclick="'markAsRead(' + ${notification.id} + ')'">읽음 처리</button>
             </div>
+            <button type="button" class="mark-all-read" onclick="markAllAsRead('REVIEWPOSTCOMMENT')">모두 읽음</button>
         </div>
         <div class="notifications" id="REVIEWPOSTREPLY">
             <div th:each="notification : ${notifications}" th:if="${notification.notificationType == 'REVIEWPOSTREPLY' && notification.isRead() == false}" class="notification" th:classappend="${notification.read ? 'read' : 'unread'}">
@@ -132,6 +151,7 @@
                 <p class="notification-date" th:text="${notification.createdAt}">2024-08-29T12:34:56</p>
                 <button type="button" th:if="!${notification.read}" th:onclick="'markAsRead(' + ${notification.id} + ')'">읽음 처리</button>
             </div>
+            <button type="button" class="mark-all-read" onclick="markAllAsRead('REVIEWPOSTREPLY')">모두 읽음</button>
         </div>
     </div>
 </div>
@@ -199,12 +219,15 @@
             const formattedDateTime = `${dateString} ${timeString}`;
 
             notificationElement.innerHTML = `
-                <p>${notification.message}</p>
-                <p>${formattedDateTime}</p>
-                ${!notification.read ? `<button type="button" onclick="markAsRead(${notification.id})">읽음 처리</button>` : ''}
-            `;
-            notificationSection.appendChild(notificationElement);
+        <p>${notification.message}</p>
+        <p>${formattedDateTime}</p>
+        ${!notification.read ? `<button type="button" onclick="markAsRead(${notification.id})">읽음 처리</button>` : ''}
+    `;
+
+            // 새로운 알림을 상단에 추가
+            notificationSection.insertBefore(notificationElement, notificationSection.firstChild);
         }
+
 
         // 날짜 포맷팅 함수
         function formatDate(date) {
@@ -243,8 +266,14 @@
                     // UI 업데이트
                     const buttons = document.querySelectorAll(`button[onclick="markAsRead(${notificationId})"]`);
                     buttons.forEach(button => {
-                        button.closest('.notification').classList.add('read');
+                        const notificationElement = button.closest('.notification');
+                        notificationElement.classList.add('slide-out'); // 슬라이드 아웃 클래스 추가
+                        // 애니메이션이 끝난 후 알림 요소를 제거
+                        notificationElement.addEventListener('animationend', function() {
+                            notificationElement.remove();
+                        });
                         button.style.display = 'none';
+                        updateNotificationCount();
                     });
                 } else {
                     console.error('Failed to mark notification as read.');
@@ -253,6 +282,53 @@
                 console.error('Error:', error);
             });
         };
+
+
+        // 타입별 알림 모두 읽음 처리
+        window.markAllAsRead = function(notificationType) {
+            fetch(`/notifications/readAll?type=${notificationType}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // 모든 알림을 읽음 처리했으므로 UI 업데이트
+                        const notifications = document.querySelectorAll(`#${notificationType} .notification.unread`);
+                        notifications.forEach(notification => {
+                            // 슬라이드 애니메이션 효과 추가
+                            notification.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                            notification.style.transform = 'translateY(-20px)';
+                            notification.style.opacity = '0';
+
+                            // 애니메이션 종료 후 DOM에서 제거
+                            notification.addEventListener('transitionend', () => {
+                                notification.classList.remove('unread');
+                                notification.classList.add('read');
+                                notification.style.transform = ''; // 원래 위치로 복원
+                                notification.style.opacity = ''; // 불투명도 복원
+                                notification.remove(); // 알림 제거
+                            }, { once: true });
+                            updateNotificationCount();
+
+                        });
+                    } else {
+                        console.error('Failed to mark all notifications as read');
+                    }
+                })
+                .catch(err => console.error('Error marking all notifications as read:', err));
+        };
+
+        function updateNotificationCount() {
+            fetch(`/api/notification/count?userId=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('notification-count').textContent = data || 0;
+                })
+                .catch(error => console.error('Error fetching notification count:', error));
+        }
+
     });
 </script>
 </body>

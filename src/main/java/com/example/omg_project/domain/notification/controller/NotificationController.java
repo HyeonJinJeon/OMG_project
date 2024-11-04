@@ -66,4 +66,24 @@ public class NotificationController {
         notificationService.markAsRead(id);
         return ResponseEntity.ok().build();
     }
+
+    /**
+     * 알림 타입별로 모든 알림을 읽음 처리하는 메서드.
+     * - 주어진 타입에 해당하는 모든 알림을 읽음 상태로 변경합니다.
+     *
+     * @param type 읽음 처리할 알림 타입 (e.g., "CHAT", "JOINPOSTCOMMENT")
+     * @param request HTTP 요청 객체, JWT 토큰에서 사용자 정보를 추출하는 데 사용됩니다.
+     * @return 상태 코드 200 OK와 함께 성공 응답을 반환합니다.
+     */
+    @PostMapping("/readAll")
+    public ResponseEntity<Void> markAllAsReadByType(@RequestParam("type") String type, HttpServletRequest request) {
+        String accessToken = jwtTokenizer.getAccessTokenFromCookies(request);
+        if(accessToken != null){
+            String username = jwtTokenizer.getUsernameFromToken(accessToken);
+            User user = userService.findByUsername(username).orElse(null);
+            Long userId = user.getId();
+            notificationService.markAllAsReadByType(userId, type);
+        }
+        return ResponseEntity.ok().build();
+    }
 }

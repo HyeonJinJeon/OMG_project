@@ -13,6 +13,9 @@ import java.util.List;
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     List<Notification> findByUserIdAndIsReadFalse(Long userId);
 
+    @Query("SELECT n FROM Notification n WHERE n.userId = :userId AND n.isRead = false AND n.notificationType = :type")
+    List<Notification> findUnreadNotificationsByUserIdAndType(@Param("userId") Long userId, @Param("type") String type);
+
     @Query("SELECT COUNT(n) FROM Notification n WHERE n.userId = :userId AND n.isRead = false")
     long countUnreadNotifications(@Param("userId") Long userId);
 }

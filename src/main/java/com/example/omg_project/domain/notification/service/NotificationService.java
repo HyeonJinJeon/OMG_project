@@ -14,4 +14,6 @@ public interface NotificationService {
     void markAsRead(Long id);
 
     long getUnreadNotificationCount(Long userId);
+
+    void markAllAsReadByType(Long userId, String type);
 }
