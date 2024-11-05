@@ -1,6 +1,6 @@
 # OMG: 여행 계획 및 동행자 모집 플랫폼
 
-- omg 접속 : [OMG Link](http://43.202.189.185:8080/)
+- omg 접속 : [OMG Link](http://ohmyguide.duckdns.org/)
 <br/>
 
 
