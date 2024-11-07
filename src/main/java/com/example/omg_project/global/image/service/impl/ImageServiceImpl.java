@@ -129,8 +129,8 @@ public class ImageServiceImpl implements ImageService {
         try {
             // S3에 업로드 요청을 생성하고 파일을 업로드
             PutObjectRequest putObjectRequest =
-                    new PutObjectRequest(bucketName, s3FileName, byteArrayInputStream, metadata)
-                    .withCannedAcl(CannedAccessControlList.PublicRead);
+                    new PutObjectRequest(bucketName, s3FileName, byteArrayInputStream, metadata);
+//                    .withCannedAcl(CannedAccessControlList.PublicRead);
             amazonS3.putObject(putObjectRequest);
         } catch (Exception e) {
             throw new CustomException(ErrorCode.PUT_OBJECT_EXCEPTION);
