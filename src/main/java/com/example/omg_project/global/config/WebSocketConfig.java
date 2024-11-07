@@ -12,23 +12,23 @@ import org.springframework.web.socket.config.annotation.*;
 @EnableWebSocket
 @EnableWebSocketMessageBroker
 @RequiredArgsConstructor
-public class WebSocketConfig implements WebSocketConfigurer, WebSocketMessageBrokerConfigurer {
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     private final CustomHandshakeInterceptor customHandshakeInterceptor;
     private final WebSocketHandler myWebSocketHandler;
     private final NotificationWebSocketHandler notificationWebSocketHandler;
 
-    @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        // WebSocket 핸들러 등록
-        registry.addHandler(myWebSocketHandler, "/chat/{roomId}")
-                .setAllowedOrigins("*") // CORS 설정
-                .addInterceptors(customHandshakeInterceptor);
-
-        registry.addHandler(notificationWebSocketHandler, "/ws/notifications")
-                .setAllowedOrigins("*") // CORS 설정
-                .addInterceptors(customHandshakeInterceptor);
-    }
+//    @Override
+//    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+//        // WebSocket 핸들러 등록
+//        registry.addHandler(myWebSocketHandler, "/chat/{roomId}")
+//                .setAllowedOrigins("*") // CORS 설정
+//                .addInterceptors(customHandshakeInterceptor);
+//
+//        registry.addHandler(notificationWebSocketHandler, "/ws/notifications")
+//                .setAllowedOrigins("*") // CORS 설정
+//                .addInterceptors(customHandshakeInterceptor);
+//    }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
