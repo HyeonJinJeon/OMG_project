@@ -6,7 +6,6 @@ import com.example.omg_project.domain.chat.entity.ChatRoom;
 import com.example.omg_project.domain.chat.repository.ChatMessageRepository;
 import com.example.omg_project.domain.chat.repository.ChatRoomRepository;
 import com.example.omg_project.domain.chat.service.BadWordService;
-import com.example.omg_project.domain.chat.websocket.WebSocketHandler;
 import com.example.omg_project.domain.notification.service.NotificationService;
 import com.example.omg_project.domain.trip.entity.Team;
 import com.example.omg_project.domain.trip.repository.TeamRepository;
@@ -23,8 +22,6 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.*;
