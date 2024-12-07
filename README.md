@@ -58,11 +58,16 @@ OMG(Oh My Guide)는 사용자가 여행 계획을 세우고 동행자를 모집�
 
 ## 아키텍처
 - 전반적인 아키텍처
+  <br>
 <img src="https://github.com/user-attachments/assets/d8941a78-9bf3-4a7b-b5a4-49a0e1eb9133" alt="아키텍처 설명" width="500"/>
+<br>
 - 팀 채팅 기능
-<img src="src/main/resources/static/readmeImage/chat.png"/>
+  <br>
+<img src="src/main/resources/static/readmeImage/chat.png" alt="아키텍처 설명" width="500">
+<br>
 - 알림 기능
-<img src="src/main/resources/static/readmeImage/notification.png"/>
+  <br>
+<img src="src/main/resources/static/readmeImage/notification.png" alt="아키텍처 설명" width="500">
 
 ## :chart_with_upwards_trend: 성능 개선
 
