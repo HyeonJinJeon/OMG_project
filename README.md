@@ -57,17 +57,24 @@ OMG(Oh My Guide)는 사용자가 여행 계획을 세우고 동행자를 모집�
 
 
 ## 아키텍처
-- 전반적인 아키텍처
-  <br>
-<img src="https://github.com/user-attachments/assets/d8941a78-9bf3-4a7b-b5a4-49a0e1eb9133" alt="아키텍처 설명" width="500"/>
-<br>
-- 팀 채팅 기능
-  <br>
-<img src="src/main/resources/static/readmeImage/chat.png" alt="아키텍처 설명" width="500">
-<br>
-- 알림 기능
-  <br>
-<img src="src/main/resources/static/readmeImage/notification.png" alt="아키텍처 설명" width="500">
+### 전반적인 아키텍처
+서비스의 주요 구성 요소와 데이터 흐름을 시각화한 아키텍처입니다.
+
+<img src="https://github.com/user-attachments/assets/d8941a78-9bf3-4a7b-b5a4-49a0e1eb9133" alt="전반적인 아키텍처" width="500"/>
+
+---
+
+### 팀 채팅 기능
+Kafka와 Stomp를 활용한 실시간 팀 채팅 기능 아케텍처입니다.
+
+<img src="src/main/resources/static/readmeImage/chat.png" alt="팀 채팅 아키텍처" width="500"/>
+
+---
+
+### 알림 기능
+Redis의 Pub/Sub과 Stomp를 활용한 알림 시스템 아키텍처입니다.
+
+<img src="src/main/resources/static/readmeImage/notification.png" alt="알림 기능 아키텍처" width="500"/>
 
 ## :chart_with_upwards_trend: 성능 개선
 
